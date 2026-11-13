@@ -1,0 +1,358 @@
+/* EarsMixer site — styled after Apple's iOS documentation and support pages.
+   iOS system colours, SF type scale, grouped inset lists, translucent nav bar.
+   Follows the reader's light/dark setting. */
+
+:root {
+  color-scheme: light dark;
+
+  /* iOS system colours (light) */
+  --blue: #007aff;
+  --green: #34c759;
+  --orange: #ff9500;
+  --label: #000000;
+  --label-2: rgba(60, 60, 67, 0.6);
+  --label-3: rgba(60, 60, 67, 0.3);
+  --separator: rgba(60, 60, 67, 0.29);
+  --bg: #ffffff;
+  --grouped-bg: #f2f2f7;
+  --cell: #ffffff;
+  --fill: rgba(120, 120, 128, 0.12);
+  --bar: rgba(249, 249, 249, 0.8);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #0a84ff;
+    --green: #30d158;
+    --orange: #ff9f0a;
+    --label: #ffffff;
+    --label-2: rgba(235, 235, 245, 0.6);
+    --label-3: rgba(235, 235, 245, 0.3);
+    --separator: rgba(84, 84, 88, 0.6);
+    --bg: #000000;
+    --grouped-bg: #000000;
+    --cell: #1c1c1e;
+    --fill: rgba(118, 118, 128, 0.24);
+    --bar: rgba(29, 29, 31, 0.72);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--grouped-bg);
+  color: var(--label);
+  font: 17px/1.47 var(--font);
+  letter-spacing: -0.022em;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Navigation bar ---------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bar);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 0.5px solid var(--separator);
+}
+.navbar-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  height: 52px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--label);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.012em;
+}
+.navbar .brand:hover { text-decoration: none; }
+.navbar .brand img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6.5px; /* iOS icon corner ratio */
+}
+.navbar nav { display: flex; gap: 22px; }
+.navbar nav a {
+  color: var(--label);
+  font-size: 13px;
+  opacity: 0.8;
+  letter-spacing: -0.01em;
+}
+.navbar nav a:hover { opacity: 1; text-decoration: none; }
+.navbar nav a[aria-current="page"] { opacity: 1; font-weight: 600; }
+
+/* ---------- Page layout ---------- */
+
+main {
+  max-width: 692px;
+  margin: 0 auto;
+  padding: 44px 22px 72px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--label-2);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: 0.004em;
+}
+
+.lede {
+  margin: 0 0 36px;
+  color: var(--label-2);
+  font-size: 21px;
+  line-height: 1.38;
+  letter-spacing: 0.011em;
+}
+
+h2 {
+  margin: 44px 0 10px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.14;
+  font-weight: 700;
+  letter-spacing: 0.007em;
+}
+
+p { margin: 0 0 16px; }
+
+ul.bullets { margin: 0 0 16px; padding-left: 22px; }
+ul.bullets li { margin: 6px 0; }
+
+.meta { color: var(--label-2); font-size: 14px; margin: 0 0 32px; }
+
+/* ---------- Grouped inset list (iOS Settings style) ---------- */
+
+.list-header {
+  margin: 28px 16px 7px;
+  color: var(--label-2);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: -0.006em;
+}
+.list-footer {
+  margin: 7px 16px 0;
+  color: var(--label-2);
+  font-size: 13px;
+  line-height: 1.38;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--cell);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.list > li,
+.list > a,
+.list > details {
+  position: relative;
+  display: block;
+  padding: 11px 16px;
+  color: var(--label);
+}
+/* inset separators */
+.list > li + li::before,
+.list > a + a::before,
+.list > details + details::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 0;
+  border-top: 0.5px solid var(--separator);
+}
+.list.with-icons > li + li::before,
+.list.with-icons > a + a::before { left: 60px; }
+
+/* Numbered steps */
+.list.steps { counter-reset: step; }
+.list.steps > li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding-left: 16px;
+}
+.list.steps > li::after {
+  counter-increment: step;
+  content: counter(step);
+  order: -1;
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list.steps > li + li::before { left: 58px; }
+
+/* Disclosure rows (FAQ) */
+.list details summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: -11px -16px;
+  padding: 11px 16px;
+}
+.list details summary::-webkit-details-marker { display: none; }
+.list details summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--label-3);
+  border-bottom: 2px solid var(--label-3);
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+.list details[open] summary::after { transform: rotate(45deg); }
+.list details p {
+  margin: 18px 0 2px;
+  color: var(--label-2);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Tappable link rows with chevron */
+.list > a { display: flex; align-items: center; gap: 14px; }
+.list > a:hover { text-decoration: none; background: var(--fill); }
+.list > a::after {
+  content: "";
+  margin-left: auto;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--label-3);
+  border-top: 2px solid var(--label-3);
+  transform: rotate(45deg);
+}
+.row-icon {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.row-icon.blue { background: var(--blue); }
+.row-icon.green { background: var(--green); }
+.row-icon.orange { background: var(--orange); }
+.row-text { display: flex; flex-direction: column; line-height: 1.25; }
+.row-text small { color: var(--label-2); font-size: 13px; }
+
+/* ---------- Hero (landing) ---------- */
+
+.hero { text-align: center; padding-top: 16px; }
+.hero .app-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 27px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  margin-bottom: 22px;
+}
+.hero h1 { font-size: 48px; line-height: 1.08; }
+.hero .lede { margin-left: auto; margin-right: auto; max-width: 560px; }
+.badge {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--label-2);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 980px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 400;
+}
+.button:hover { text-decoration: none; filter: brightness(1.08); }
+
+/* ---------- Callout (Apple docs "Note") ---------- */
+
+.callout {
+  margin: 28px 0;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  background: var(--cell);
+  border-left: 4px solid var(--blue);
+}
+.callout strong { display: block; margin-bottom: 2px; }
+.callout p { margin: 0; color: var(--label-2); font-size: 15px; }
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 0.5px solid var(--separator);
+  color: var(--label-2);
+  font-size: 12px;
+}
+.footer-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px 22px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 18px;
+}
+footer nav { display: flex; gap: 18px; }
+footer a { color: var(--label-2); }
+
+@media (max-width: 600px) {
+  h1 { font-size: 32px; }
+  .hero h1 { font-size: 36px; }
+  .lede { font-size: 19px; }
+  h2 { font-size: 24px; }
+  .navbar nav { gap: 16px; }
+}
